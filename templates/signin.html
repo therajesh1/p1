@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #121212; /* Dark background */
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 900px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            height: 70vh; /* Adjusted height for better balance */
+        }
+        .image-container {
+            flex: 1; /* Flex property to occupy equal space */
+            background: url('https://source.unsplash.com/random/600x600/?furniture,design') no-repeat center center; /* Replace with your image */
+            background-size: cover;
+            min-width: 300px; /* Minimum width for the image container */
+        }
+        .form-container {
+            flex: 1; /* Flex property to occupy equal space */
+            background-color: rgba(33, 33, 33, 0.9); /* Slightly transparent dark background */
+            padding: 2.5rem;
+            border-radius: 0 15px 15px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            border: none;
+            transition: all 0.3s;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn-outline-primary {
+            border-color: rgba(255, 255, 255, 0.6);
+            color: #ffffff;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .btn-outline-primary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: #ffffff;
+        }
+        .card-text {
+            margin-bottom: 2rem;
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="image-container">
+        <img src="/static/furniimage03.jpeg" alt="Shopkeeper Registration Image" style="width: 100%; height: 100%; object-fit: cover;">  <!-- Adjusted image styling -->
+    </div>
+    <div class="form-container">
+        <h5 class="card-title">Welcome Back!</h5>
+        <p class="card-text">Please select your role to continue:</p>
+        <a href="/register_shopkeeper" class="btn btn-custom btn-lg">Sign in as Shopkeeper</a>
+        <a href="/register_customer" class="btn btn-outline-primary btn-lg">Sign in as Customer</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

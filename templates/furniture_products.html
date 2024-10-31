@@ -1,0 +1,22 @@
+<!-- Example template: furniture_products.html -->
+
+{% extends "base.html" %}
+{% block title %}
+product{% endblock title %}
+{% block body %}
+    <h1>{{ category_name }} Products</h1>
+
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li>
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+                    <p>Price: ${{ product.price }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products found in this category.</p>
+    {% endif %}
+{% endblock body %}

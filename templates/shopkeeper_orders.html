@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Manage Orders{% endblock title %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2>Manage Orders</h2>
+    {% for order in orders %}
+        <div class="order-item mb-4">
+            <h5>{{ order.product.name }}</h5>
+            <p><strong>Customer:</strong> {{ order.customer.user.username }}</p>
+            <p><strong>Status:</strong> {% if order.is_paid %}Paid{% else %}Pending{% endif %}</p>
+            <p><strong>Order Date:</strong> {{ order.order_date }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock body %}

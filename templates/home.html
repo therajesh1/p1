@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block body %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+<div class="container-fluid vh-100 no-margin d-flex align-items-center"> <!-- Increased height to vh-100 -->
+    <div class="row w-100">
+        <div class="col-lg-6 d-flex flex-column justify-content-center my-3 text-start" style="padding-left: 0;"> <!-- Added padding-left: 0 for extreme left -->
+            <h1 class="mb-0 display-3">Welcome to FurniCure</h1> <!-- Increased font size -->
+            <p class="typing-animation fs-2"> <!-- Increased font size -->
+                Buy <span id="typing"></span>
+            </p>
+            <p class="about-info mt-4 fs-5"> <!-- Increased font size -->
+                Building a strong network between <strong>shops</strong> and <strong>customers</strong>. A place where both meet their <strong>needs</strong>.
+            </p>
+        </div>
+        <div class="col-lg-6 d-flex justify-content-center align-items-center">
+            <div id="carouselImages" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000"> <!-- Set the slide interval to 2000ms -->
+                <div class="carousel-inner mt-5"> <!-- Increased margin-top for spacing -->
+                    <div class="carousel-item active">
+                        <img src="/static/furniimage04.jpeg" alt="Image 1" class="rectangular-img">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/static/furniimage05.jpeg" alt="Image 2" class="rectangular-img">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/static/furniimage06.jpeg" alt="Image 3" class="rectangular-img">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/static/furniimage07.jpeg" alt="Image 4" class="rectangular-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .no-margin {
+        margin: 0 !important; /* Remove all margins */
+    }
+
+    body {
+        background-color: #f7f9fc; /* Light background color */
+        color: #333; /* Darker text color for contrast */
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+
+    .rectangular-img {
+        width: 100%; /* Make image responsive */
+        height: 500px; /* Increased height for better visibility */
+        object-fit: cover; /* Ensure the image covers the area */
+        border: 5px solid #17a2b8; /* Accent border color */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow for depth */
+    }
+
+    .rectangular-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+    }
+
+    .typing-animation {
+        font-size: 2.5rem; /* Increased font size */
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        color: #17a2b8; /* Accent color for typing animation */
+    }
+
+    #typing {
+        font-weight: 600;
+        color: #6c757d; /* Neutral color for typing cursor */
+        border-right: 2px solid #17a2b8; /* Cursor color */
+        padding-right: 5px;
+        animation: blink 0.75s step-end infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            border-color: transparent;
+        }
+    }
+
+    .about-info {
+        font-size: 1.5rem; /* Increased font size */
+        font-weight: 400;
+        color: #555; /* Softer text color */
+        line-height: 1.6;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        transition: color 0.3s ease;
+    }
+
+    .about-info strong {
+        color: #17a2b8; /* Accent color for strong text */
+        font-weight: 600;
+    }
+
+    .about-info:hover {
+        color: #d4af37; /* Change color on hover */
+        transition: color 0.3s ease;
+    }
+
+    .typing-animation:hover {
+        color: #d4af37; /* Change color on hover */
+        transition: color 0.3s ease;
+    }
+
+    .categories, .products {
+        background-color: white; /* White background for cards */
+        padding: 20px; /* Spacing around sections */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        margin-top: 40px; /* Space above sections */
+    }
+
+    h2 {
+        color: #17a2b8; /* Accent color for section headings */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        border: none; /* Remove default card border */
+        border-radius: 8px; /* Rounded corners for cards */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Card transition effects */
+    }
+
+    .card:hover {
+        transform: translateY(-5px); /* Lift effect on hover */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const words = ["Sofa", "Chair", "Mandir", "Bed", "Cupboard", "Table"];
+    let i = 0;
+    let j = 0;
+    let currentWord = "";
+    let isDeleting = false;
+
+    function type() {
+        const typingElement = document.getElementById("typing");
+
+        if (!isDeleting) {
+            if (j < words[i].length) {
+                currentWord = words[i].substring(0, j + 1);
+                typingElement.innerHTML = currentWord;
+                j++;
+                setTimeout(type, 100);
+            } else {
+                isDeleting = true;
+                setTimeout(type, 1000);
+            }
+        } else {
+            if (j > 0) {
+                currentWord = words[i].substring(0, j - 1);
+                typingElement.innerHTML = currentWord;
+                j--;
+                setTimeout(type, 50);
+            } else {
+                isDeleting = false;
+                i++;
+                if (i === words.length) i = 0;
+                setTimeout(type, 500);
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => type());
+</script>
+
+{% comment %} <div class="categories mb-4">
+    <h2>Categories</h2>
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.name }}</h5>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div> {% endcomment %}
+{% comment %} <div class="categories mb-4">
+    <h2>Categories</h2>
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <a href="{% url 'sofa' %}" class="category-icon">
+                <i class="fas fa-couch fa-5x" aria-hidden="true"></i>
+                <div class="mt-2">Sofa</div>
+            </a>
+        </div>
+        <div class="col-md-3 text-center">
+            <a href="{% url 'bed' %}" class="category-icon">
+                <i class="fas fa-bed fa-5x" aria-hidden="true"></i>
+                <div class="mt-2">Bed</div>
+            </a>
+        </div>
+        <div class="col-md-3 text-center">
+            <a href="{% url 'table' %}" class="category-icon">
+                <i class="fas fa-table fa-5x" aria-hidden="true"></i>
+                <div class="mt-2">Table</div>
+            </a>
+        </div>
+        <div class="col-md-3 text-center">
+            <a href="{% url 'chair' %}" class="category-icon">
+                <i class="fas fa-chair fa-5x" aria-hidden="true"></i>
+                <div class="mt-2">Chair</div>
+            </a>
+        </div>
+        <div class="col-md-3 text-center">
+            <a href="{% url 'cupboard' %}" class="category-icon">
+                <i class="fas fa-archive fa-5x" aria-hidden="true"></i>
+                <div class="mt-2">Cupboard</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .category-icon {
+        text-decoration: none; /* Remove underline */
+        color: #17a2b8; /* Accent color for icons */
+        transition: transform 0.3s ease, color 0.3s ease; /* Animation effects */
+    }
+
+    .category-icon:hover {
+        transform: scale(1.1); /* Slightly enlarge on hover */
+        color: #d4af37; /* Change color on hover */
+    }
+</style> {% endcomment %}
+  <!-- Include Font Awesome from CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMQQnKzJ+n9Ka2svQF0eF+0nCdD64+gkpTP0Ue" crossorigin="anonymous">
+  <div class="categories mb-4">
+    <h2>Categories</h2>
+    <div class="d-flex justify-content-between">
+        <div class="category-icon">
+            <a href="{% url 'sofa' %}">
+                <div class="image-container">
+                    <img src="/static/furniimage08.jpeg" alt="Sofa" class="category-image"> <!-- Insert sofa image -->
+                </div>
+            </a>
+        </div>
+        <div class="category-icon">
+            <a href="{% url 'bed' %}">
+                <div class="image-container">
+                    <img src="/static/furniimage10.jpeg" alt="Bed" class="category-image"> <!-- Insert bed image -->
+                </div>
+            </a>
+        </div>
+        <div class="category-icon">
+            <a href="{% url 'table' %}">
+                <div class="image-container">
+                    <img src="/static/furniimage09.jpeg" alt="Table" class="category-image"> <!-- Insert table image -->
+                </div>
+            </a>
+        </div>
+        <div class="category-icon">
+            <a href="{% url 'chair' %}">
+                <div class="image-container">
+                    <img src="/static/furniimage12.jpeg" alt="Chair" class="category-image"> <!-- Insert chair image -->
+                </div>
+            </a>
+        </div>
+        <div class="category-icon">
+            <a href="{% url 'cupboard' %}">
+                <div class="image-container">
+                    <img src="/static/furniimage11.jpeg" alt="Cupboard" class="category-image"> <!-- Insert cupboard image -->
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .category-icon {
+        flex: 1; /* Allow each category icon to take equal space */
+        margin: 0 10px; /* Add margin for spacing */
+        text-align: center; /* Center the content */
+        max-width: 150px; /* Optional: Set max width to control size */
+    }
+
+    .image-container {
+        width: 100%; /* Full width of the container */
+        padding-top: 100%; /* Creates a square aspect ratio */
+        position: relative; /* Position relative for absolute child */
+        overflow: hidden; /* Hide overflow */
+        border: 1px solid #ddd; /* Optional: add a border */
+        border-radius: 8px; /* Optional: rounded corners */
+    }
+
+    .category-image {
+        position: absolute; /* Position absolute to fill container */
+        top: 0; /* Align to top */
+        left: 0; /* Align to left */
+        width: 100%; /* Fill width */
+        height: 100%; /* Fill height */
+        object-fit: cover; /* Cover the container while preserving aspect ratio */
+    }
+</style>
+
+
+<div class="products mb-4">
+    <h2>Random Product Suggestions</h2>
+    <div class="row">
+        {% if products %}
+            {% for product in products %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description|truncatewords:15 }}</p>
+                            <p class="card-text"><strong>Price: ${{ product.price }}</strong></p>
+                            <a href="{% url 'product_detail' product.id %}" class="btn btn-dark">View Product</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No products available at the moment.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock body %}

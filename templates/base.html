@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+
+      {% endblock %}FurniCure
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <style>
+      /* Custom styles */
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Ensure full height for footer positioning */
+        color: aquamarine;
+      }
+      
+      .navbar {
+        background: transparent; /* Fully transparent background */
+      }
+      
+      .navbar-brand {
+        font-weight: bold;
+        font-size: 1.5rem; /* Increased font size */
+        color: #333; /* Navbar brand color */
+        display: flex;
+        align-items: center; /* Center items vertically */
+      }
+      
+      .navbar-brand img {
+        width: 40px; /* Adjust logo size */
+        height: 40px; /* Adjust logo size */
+        margin-right: 10px; /* Space between logo and text */
+      }
+      
+      .nav-link {
+        position: relative;
+        color: #333;
+        display: flex;
+        align-items: center;
+      }
+      
+      /* Black underline animation */
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -5px;
+        height: 2px;
+        background: black;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+      
+      .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+      
+      /* Remove default Bootstrap arrow */
+      .dropdown-toggle::after {
+        display: none;
+      }
+      
+      /* Adjust custom icon size and alignment */
+      .dropdown-toggle .bi-caret-down-fill {
+        font-size: 0.8em;
+        margin-left: 5px;
+        color: #333;
+        vertical-align: middle;
+      }
+      
+      main {
+        flex: 1; /* Allow main to take available space */
+        margin-top: 70px; /* Space for the fixed navbar */
+      }
+      
+      footer {
+        background-color: #333;
+        color: #fff;
+        padding: 40px 0;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <!-- Added fixed-top class -->
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="/static/FC.png" alt="Logo" /> <!-- Placeholder logo -->
+          FurniCure
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+
+            <!-- Dropdown menu with single custom icon and black underline animation -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services <i class="bi bi-caret-down-fill"></i></a>
+              <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                <li>
+                  <a class="dropdown-item" href="#">Service 1</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Service 2</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Service 3</a>
+                </li>
+              </ul>
+            </li>
+            <!-- In your base.html or navbar section -->
+            {% if request.user.is_authenticated and request.user.shopkeeper %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'manage_products' %}">Manage Products</a>
+              </li>
+            {% endif %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            {% if user.is_authenticated %}
+              <!-- If the user is logged in, show Logout option -->
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+            {% else %}
+              <!-- Show both Login and Sign Up options for unauthenticated users -->
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      {% block body %}
+        <!-- Your main content goes here -->
+      {% endblock %}
+    </main>
+
+    <footer class="bg-dark text-light py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <h5 class="text-uppercase mb-3">FurniCure</h5>
+            <p>&copy; 2024 StudyMate. All rights reserved.</p>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h5 class="text-uppercase mb-3">Quick Links</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="/" class="text-light">Home</a>
+              </li>
+              {% if user.is_authenticated %}
+                <li>
+                  <a href="{% url 'logout' %}" class="text-light">Logout</a>
+                </li>
+              {% else %}
+                <li>
+                  <a href="/login" class="text-light">Login</a>
+                </li>
+                <li>
+                  <a href="/signin" class="text-light">Sign Up</a>
+                </li>
+              {% endif %}
+              <li>
+                <a href="/contact" class="text-light">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4 mb-4 text-center">
+            <h5 class="text-uppercase mb-3">Follow Us</h5>
+            <div class="d-flex justify-content-center">
+              <a href="https://www.instagram.com/study.mate._/" class="text-light mx-2" aria-label="Instagram"><i class="fab fa-instagram fa-2x"></i></a>
+              <a href="https://t.me/studymateoff" class="text-light mx-2" aria-label="Telegram"><i class="fab fa-telegram fa-2x"></i></a>
+              <a href="https://www.linkedin.com/posts/officialstudymate_love-you-3000-times-activity-7245671264034443266-XcwF?utm_source=share&utm_medium=member_android" class="text-light mx-2" aria-label="LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a>
+              <a href="https://youtube.com/@studymate9595?si=vrA2eJpZJl_W7g4V" class="text-light mx-2" aria-label="YouTube"><i class="fab fa-youtube fa-2x"></i></a>
+            </div>
+          </div>
+        </div>
+        <hr class="border-light" />
+        <div class="text-center">
+          <small>Designed with ❤️ by StudyMate Team</small>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,198 @@
+{% comment %} <!-- eco/templates/eco/register_customer.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Customer</title>
+</head>
+<body>
+    <h1>Register Customer</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <input type="text" name="address" placeholder="Address" required><br>
+        <input type="text" name="city" placeholder="City" required><br>
+        <input type="text" name="phone_number" placeholder="Phone Number" required><br>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html> {% endcomment %}
+<!-- eco/templates/eco/register_customer.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Customer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Floating Icons Animation */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #121212;  /* Dark background */
+            color: #ffffff;  /* White text */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .floating-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .floating-icons i {
+            font-size: 60px;  /* Increased icon size */
+            color: rgba(255, 255, 255, 0.3);  /* Lighter icon color */
+            position: absolute;
+            animation: floatAnimation 10s ease-in-out infinite;  /* Increased speed */
+        }
+
+        /* Add more furniture icons */
+        .floating-icons i:nth-child(1) { top: 5%; left: 10%; animation-delay: 0s; }
+        .floating-icons i:nth-child(2) { top: 15%; left: 80%; animation-delay: 1s; }
+        .floating-icons i:nth-child(3) { top: 55%; left: 20%; animation-delay: 2s; }
+        .floating-icons i:nth-child(4) { top: 70%; left: 85%; animation-delay: 3s; }
+        .floating-icons i:nth-child(5) { top: 40%; left: 50%; animation-delay: 4s; }
+        .floating-icons i:nth-child(6) { top: 10%; left: 30%; animation-delay: 5s; }  /* Additional icon */
+        .floating-icons i:nth-child(7) { top: 25%; left: 60%; animation-delay: 6s; }  /* Additional icon */
+        .floating-icons i:nth-child(8) { top: 50%; left: 15%; animation-delay: 7s; }  /* Additional icon */
+        .floating-icons i:nth-child(9) { top: 80%; left: 40%; animation-delay: 8s; }  /* Additional icon */
+        .floating-icons i:nth-child(10) { top: 60%; left: 75%; animation-delay: 9s; }  /* Additional icon */
+
+        @keyframes floatAnimation {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(20deg); }  /* Increased vertical movement */
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* Main Container Styling */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-container {
+            display: flex;
+            align-items: stretch;  /* Align items to fill the container */
+            background: rgba(30, 30, 30, 0.95);  /* Darker container background */
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);  /* Darker shadow */
+            z-index: 1;
+            width: 100%;
+            max-width: 900px;  /* Adjusted max-width for more space */
+        }
+
+        h1 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #e0e0e0;  /* Lighter heading color */
+            flex: 1;  /* Allow heading to take available space */
+        }
+
+        /* Form Styling */
+        input {
+            background: #333;  /* Dark input background */
+            color: #ffffff;  /* White text for input */
+            border: 1px solid #555;  /* Darker border */
+            border-radius: 5px;
+            padding: 0.75rem;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background-color: #007bff;  /* Button background color */
+            border: none;
+            padding: 0.75rem;
+            color: #ffffff;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;  /* Darker on hover */
+        }
+
+        /* Image Styling */
+        .image-container {
+            flex: 1;  /* Take equal space as form */
+            margin-right: 20px;  /* Space between image and form */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            width: 100%;  /* Make image responsive */
+            height: auto;  /* Maintain aspect ratio */
+            max-height: 400px;  /* Set max height */
+            border-radius: 12px;
+        }
+        
+        /* Form Section */
+        .form-section {
+            flex: 1;  /* Take equal space as image */
+            display: flex;
+            flex-direction: column;  /* Stack elements vertically */
+            justify-content: center;  /* Center align the form */
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+<div class="floating-icons">
+    <i class="fas fa-couch"></i>
+    <i class="fas fa-chair"></i>
+    <i class="fas fa-bed"></i>
+    <i class="fas fa-tv"></i>
+    <i class="fas fa-archway"></i>
+    <i class="fas fa-lamp"></i>  <!-- Additional icons -->
+    <i class="fas fa-desk"></i>
+    <i class="fas fa-table"></i>
+    <i class="fas fa-sofa"></i>
+    <i class="fas fa-bookcase"></i>
+</div>
+
+<div class="container">
+    <div class="main-container">
+        <div class="image-container">
+            <img src="/static/furniimage02.jpeg" alt="Furniture Image">  <!-- Replace with your image source -->
+        </div>
+        <div class="form-section">
+            <h1>Register Customer</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="text" name="address" placeholder="Address" required>
+                <input type="text" name="city" placeholder="City" required>
+                <input type="text" name="phone_number" placeholder="Phone Number" required>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

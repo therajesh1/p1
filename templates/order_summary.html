@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Order Summary{% endblock title %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2>Order Summary</h2>
+    <p><strong>Product:</strong> {{ order.product.name }}</p>
+    <p><strong>Address:</strong> {{ order.address }}</p>
+    <p><strong>Phone Number:</strong> {{ order.phone_number }}</p>
+    <p><strong>Email:</strong> {{ order.email }}</p>
+    <p><strong>Order Date:</strong> {{ order.order_date }}</p>
+    
+    {% if not order.is_paid %}
+        <form method="POST" action="{% url 'process_payment' order.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Do Payment</button>
+        </form>
+    {% else %}
+        <p><strong>Status:</strong> Paid</p>
+    {% endif %}
+</div>
+{% endblock body %}
