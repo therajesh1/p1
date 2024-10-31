@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'p2',
+    'p2.apps.P2Config',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
